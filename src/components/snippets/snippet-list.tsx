@@ -3,10 +3,15 @@
 import { api } from '@/lib/trpc/client'
 import { SnippetCard } from './snippet-card'
 import {SnippetSkeleton} from "@/components/snippets/snippet-skeleton";
+import {inferRouterOutputs} from "@trpc/server";
+import { type AppRouter } from '@/server/api/root'
+
+type RouterOutput = inferRouterOutputs<AppRouter>;
+type Snippet = RouterOutput['snippet']['search'];
 
 interface SnippetListProps {
     searchQuery: string
-    onEdit?: (snippet: any) => void
+    onEdit?: (snippet: Snippet) => void
 }
 
 export function SnippetList({ searchQuery, onEdit }: SnippetListProps) {
@@ -41,7 +46,7 @@ export function SnippetList({ searchQuery, onEdit }: SnippetListProps) {
         <>
             {snippets && snippets.length > 0 ? (
                 <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                    {snippets.map((snippet) => (
+                    {snippets.map((snippet: Snippet) => (
                         <SnippetCard key={snippet.id} snippet={snippet} onEdit={onEdit} />
                     ))}
                 </div>
