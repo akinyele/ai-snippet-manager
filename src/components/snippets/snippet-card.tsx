@@ -14,17 +14,20 @@ import { Copy, Trash2, Edit, Check } from 'lucide-react'
 import toast from 'react-hot-toast'
 import {AIAnalyzeButton} from "@/components/snippets/ai-analyze-button";
 
+
+type Snippet = {
+    id: string
+    title: string
+    description?: string | null
+    code: string
+    language: string
+    tags: string
+    createdAt: Date
+}
+
 interface SnippetCardProps {
-    snippet: {
-        id: string
-        title: string
-        description?: string | null
-        code: string
-        language: string
-        tags: string
-        createdAt: Date
-    }
-    onEdit?: (snippet: any) => void
+    snippet: Snippet
+    onEdit?: (snippet: Snippet) => void
 }
 
 export function SnippetCard({ snippet, onEdit }: SnippetCardProps) {
@@ -42,7 +45,7 @@ export function SnippetCard({ snippet, onEdit }: SnippetCardProps) {
             const previousSnippets = utils.snippet.getAll.getData()
 
             // Optimistically update the cache
-            utils.snippet.getAll.setData(undefined, (old) =>
+            utils.snippet.getAll.setData(undefined, (old: Snippet[]) =>
                 old?.filter((s) => s.id !== id)
             )
 
