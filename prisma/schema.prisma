@@ -1,0 +1,19 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Snippet {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  code        String
+  language    String
+  tags        String
+  embedding   String?  // Store embeddings as JSON string
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

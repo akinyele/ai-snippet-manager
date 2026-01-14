@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --background: 0 0% 100%;
+        --foreground: 222.2 84% 4.9%;
+    }
+
+    .dark {
+        --background: 222.2 84% 4.9%;
+        --foreground: 210 40% 98%;
+    }
+
+    body {
+        @apply bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+}
+
+/* Code editor dark mode */
+.dark .cm-editor {
+    background-color: #1e1e1e !important;
+    color: #d4d4d4 !important;
+}
+
+.dark .cm-gutters {
+    background-color: #1e1e1e !important;
+    border-right: 1px solid #3e3e3e !important;
+}
+
+.dark .cm-activeLineGutter {
+    background-color: #2a2a2a !important;
+}
+
+.dark .cm-activeLine {
+    background-color: #2a2a2a !important;
+}
