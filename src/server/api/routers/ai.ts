@@ -77,9 +77,12 @@ export const aiRouter = createTRPCRouter({
 
             // Return full snippet data for matches
             return results.map((result) => {
-                const snippet = snippets.find((s) => s.id === result.id)
+                const snippet = snippets.find((snippet) => snippet.id === result.id)
+                if (!snippet) {
+                    throw new Error(`Snippet ${result.id} not found`)
+                }
                 return {
-                    ...snippet!,
+                    ...snippet,
                     similarity: result.similarity,
                 }
             })

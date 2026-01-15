@@ -10,11 +10,7 @@ import { useState } from 'react'
 import { api } from '@/lib/trpc/client'
 import { Sparkles, Loader2 } from 'lucide-react'
 import { SnippetCard } from './snippet-card'
-import {inferRouterOutputs} from "@trpc/server";
-import type {AppRouter} from "@/server/api/root";
-
-type RouterOutput = inferRouterOutputs<AppRouter>;
-type Snippet = RouterOutput['snippet']['getById'];
+import type { Snippet } from '@prisma/client'
 
 interface SemanticSearchProps {
     onEdit?: (snippet: Snippet) => void

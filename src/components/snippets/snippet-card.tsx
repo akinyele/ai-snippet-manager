@@ -13,17 +13,7 @@ import { CodeEditor } from './code-editor'
 import { Copy, Trash2, Edit, Check } from 'lucide-react'
 import toast from 'react-hot-toast'
 import {AIAnalyzeButton} from "@/components/snippets/ai-analyze-button";
-
-
-type Snippet = {
-    id: string
-    title: string
-    description?: string | null
-    code: string
-    language: string
-    tags: string
-    createdAt: Date
-}
+import type { Snippet } from '@prisma/client';
 
 interface SnippetCardProps {
     snippet: Snippet
@@ -45,7 +35,7 @@ export function SnippetCard({ snippet, onEdit }: SnippetCardProps) {
             const previousSnippets = utils.snippet.getAll.getData()
 
             // Optimistically update the cache
-            utils.snippet.getAll.setData(undefined, (old: Snippet[]) =>
+            utils.snippet.getAll.setData(undefined, (old: Snippet[] | undefined) =>
                 old?.filter((s) => s.id !== id)
             )
 

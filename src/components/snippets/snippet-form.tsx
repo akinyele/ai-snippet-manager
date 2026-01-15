@@ -13,16 +13,12 @@ import { CodeEditor } from './code-editor'
 import toast from 'react-hot-toast'
 import {AISuggestButton} from "@/components/snippets/ai-suggest-button";
 
+import type { Snippet } from '@prisma/client'
+
+
 interface SnippetFormProps {
     onSuccess?: () => void
-    initialData?: {
-        id?: string
-        title: string
-        description?: string
-        code: string
-        language: string
-        tags: string
-    }
+    initialData?: Pick<Snippet, "id" | "title" | "description" | "code" | "language" | "tags"> | null
 }
 
 // Common programming languages for the dropdown

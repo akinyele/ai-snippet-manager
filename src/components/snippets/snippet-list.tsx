@@ -2,12 +2,8 @@
 
 import { api } from '@/lib/trpc/client'
 import { SnippetCard } from './snippet-card'
-import {SnippetSkeleton} from "@/components/snippets/snippet-skeleton";
-import {inferRouterOutputs} from "@trpc/server";
-import { type AppRouter } from '@/server/api/root'
-
-type RouterOutput = inferRouterOutputs<AppRouter>;
-type Snippet = RouterOutput['snippet']['search'];
+import {SnippetSkeleton} from '@/components/snippets/snippet-skeleton';
+import type { Snippet } from '@prisma/client'
 
 interface SnippetListProps {
     searchQuery: string
