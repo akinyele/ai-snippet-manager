@@ -78,6 +78,7 @@ export function SnippetCard({ snippet, onEdit }: SnippetCardProps) {
             setTimeout(() => setCopied(false), 2000)
         } catch (err) {
             toast.error('Failed to copy')
+            console.error("Failed to copy", err);
         }
     }
 

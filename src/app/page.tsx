@@ -8,15 +8,20 @@ import { Toaster } from 'react-hot-toast'
 import { Plus, X } from 'lucide-react'
 import { SemanticSearch } from '@/components/snippets/semantic-search'
 import { ThemeToggle } from '@/components/theme-toggle'
+import {inferRouterOutputs} from "@trpc/server";
+import type {AppRouter} from "@/server/api/root";
+
+type RouterOutput = inferRouterOutputs<AppRouter>;
+type Snippet = RouterOutput['snippet']['getById'];
 
 
 export default function Home() {
     const [showForm, setShowForm] = useState(false)
-    const [editingSnippet, setEditingSnippet] = useState<any>(null)
+    const [editingSnippet, setEditingSnippet] = useState<Snippet>(null)
     const [searchQuery, setSearchQuery] = useState('')
     const [useSemanticSearch, setUseSemanticSearch] = useState(false)
 
-    const handleEdit = useCallback((snippet: any) => {
+    const handleEdit = useCallback((snippet: Snippet) => {
         setEditingSnippet(snippet)
         setShowForm(true)
     }, [])

@@ -14,8 +14,7 @@ import { python } from '@codemirror/lang-python'
 import { html } from '@codemirror/lang-html'
 import { css } from '@codemirror/lang-css'
 import { json } from '@codemirror/lang-json'
-
-type Languages = "javascript" | "typescript" | "jsx" | "tsx" | "python" | "html" | "css" | "json"
+import {LanguageSupport} from "@codemirror/language";
 
 interface CodeEditorProps {
     value: string
@@ -34,7 +33,7 @@ export function CodeEditor({
                            }: CodeEditorProps) {
     // Map language names to CodeMirror extensions
     const extensions = useMemo(() => {
-        const langMap: Record<string, any> = {
+        const langMap: Record<string, LanguageSupport> = {
             javascript: javascript({ jsx: true }),
             typescript: javascript({ typescript: true }),
             jsx: javascript({ jsx: true }),

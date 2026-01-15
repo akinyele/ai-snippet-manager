@@ -10,9 +10,14 @@ import { useState } from 'react'
 import { api } from '@/lib/trpc/client'
 import { Sparkles, Loader2 } from 'lucide-react'
 import { SnippetCard } from './snippet-card'
+import {inferRouterOutputs} from "@trpc/server";
+import type {AppRouter} from "@/server/api/root";
+
+type RouterOutput = inferRouterOutputs<AppRouter>;
+type Snippet = RouterOutput['snippet']['getById'];
 
 interface SemanticSearchProps {
-    onEdit?: (snippet: any) => void
+    onEdit?: (snippet: Snippet) => void
 }
 
 export function SemanticSearch({ onEdit }: SemanticSearchProps) {
@@ -40,7 +45,7 @@ export function SemanticSearch({ onEdit }: SemanticSearchProps) {
                     <h3 className="font-semibold text-purple-900">AI Semantic Search</h3>
                 </div>
                 <p className="text-sm text-purple-700 mb-3">
-                    Search using natural language. Try: "find code for authentication" or "show me hooks"
+                    Search using natural language. Try: &#34;find code for authentication&#34; or &#34;show me hooks&#34;
                 </p>
 
                 <div className="flex gap-2">
