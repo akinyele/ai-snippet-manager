@@ -1,12 +1,8 @@
 import { PrismaClient } from '@prisma/client'
-import { PrismaLibSql } from '@prisma/adapter-libsql';
+import { PrismaPg } from '@prisma/adapter-pg'
 
 
-// When running Prisma Client on Bun, use the @prisma/adapter-libsql driver adapter.
-// Bun doesn't support the native SQLite driver that better-sqlite3 relies on
-const adapter = new PrismaLibSql({
-    url: process.env.DATABASE_URL ?? '',
-});
+const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL })
 
 // Global variable to store Prisma client in development
 // Prevents creating multiple instances during hot reload
